@@ -1,0 +1,34 @@
+server:
+  port: 18081
+  http2:
+    enabled: true
+  forward-headers-strategy: FRAMEWORK
+  servlet:
+    context-path: /map
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, httptrace
+      base-path: /actuator
+
+spring:
+  application:
+    name: map-application
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+#springdoc:
+#  swagger-ui:
+#    use-root-path: true
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+  #    org.springframework.orm.jpa: DEBUG
+  #    org.springframework.transaction: DEBUG
+  config: classpath:log/logback-spring.xml
+  format: ${LOGGING_FORMAT:text}
