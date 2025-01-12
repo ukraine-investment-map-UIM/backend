@@ -20,6 +20,11 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+  data:
+    mongodb:
+      database: map-service
+      uri: mongodb://admin:password@${MAP_DB_URI:localhost}:27017/map-service?authSource=admin
+
 
 #springdoc:
 #  swagger-ui:
