@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uim-deployment
+spec:
+  replicas: 2 # Number of replicas
+  selector:
+    matchLabels:
+      app: uim
+  template:
+    metadata:
+      labels:
+        app: uim
+    spec:
+      containers:
+        - name: uim
+          image: nureclamor1s/uim:latest # Docker image
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18081
+            - containerPort: 18082
+            - containerPort: 18083
+          env:
+            - name: MAP_DB_URI
+              value: "mongo" # Environment variable matching docker-compose
+        - name: mongo
+          image: mongo:6.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: admin
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: password
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uim-service
+spec:
+  selector:
+    app: uim
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 18081 # Default to main port
+    - protocol: TCP
+      port: 18082
+      targetPort: 18082
+    - protocol: TCP
+      port: 18083
+      targetPort: 18083
+  type: LoadBalancer # Makes the service externally accessible
