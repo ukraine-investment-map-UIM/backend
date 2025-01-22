@@ -1,6 +1,6 @@
 package com.uim.map.area.config;
 
-import com.uim.map.area.core.service.AreaService;
+import com.uim.map.area.domain.core.service.AreaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

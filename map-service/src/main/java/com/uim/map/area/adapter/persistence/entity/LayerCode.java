@@ -1,4 +1,4 @@
-package com.uim.map.area.integration.model;
+package com.uim.map.area.adapter.persistence.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

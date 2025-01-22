@@ -1,4 +1,4 @@
-package com.uim.map.area.integration.model.enums;
+package com.uim.map.area.domain.core.model;
 
 public enum AreaStatus {
     CREATED,

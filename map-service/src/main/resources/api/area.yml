@@ -1,0 +1,137 @@
+openapi: "3.0.0"
+info:
+  title: Area API
+  description: API for managing areas
+  version: 1.0.0
+paths:
+  /area:
+    post:
+      tags:
+        - Area
+      summary: Initialize an Area
+      description: Creates a new area with the provided details.
+      operationId: initializeArea
+#      requestBody:
+#        required: true
+#        content:
+#          application/json:
+#            schema:
+#              $ref: '#/components/schemas/AreaDto'
+
+      responses:
+        201:
+          description: Area successfully Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AreaResponse'
+        400:
+          description: Bad request - Invalid Input
+        500:
+          description: Internal server error
+
+  /area/{id}:
+    get:
+      tags:
+        - Area
+      summary: Find Area by id
+      description: Finds area by id (self)
+      operationId: findAreaById
+      parameters:
+        - name: id
+          in: path
+          description: area id
+          required: true
+          schema:
+            type: string
+            pattern: '^([a-zA-Z0-9]){8}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){12}$'
+      responses:
+        200:
+          description: Area successfully found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AreaResponse'
+        404:
+          description: Area Not Found
+
+# ----------
+
+components:
+  schemas:
+    AreaDto:
+      type: object
+      properties:
+        cords:
+          type: array
+          description: The geographical coordinates of the area
+          items:
+            $ref: '#/components/schemas/Point'
+        layers:
+          type: array
+          description: The data layers associated with the area
+          items:
+            $ref: '#/components/schemas/LayerCode'
+        reportId:
+          type: string
+          format: uuid
+          description: The ID of the report linked to the area
+
+      required:
+        - cords
+
+    AreaResponse:
+      type: object
+      properties:
+        self:
+          type: string
+          format: uuid
+          description: Unique identifier for the area
+        userId:
+          type: string
+          format: uuid
+          description: The ID of the user associated with the area
+        coordinates:
+          type: array
+          description: The geographical coordinates of the area
+          items:
+            $ref: '#/components/schemas/Point'
+        layers:
+          type: array
+          description: The data layers associated with the area
+          items:
+            $ref: '#/components/schemas/LayerCode'
+        reportId:
+          type: string
+          format: uuid
+          description: The ID of the report linked to the area
+        status:
+          type: string
+          enum: [ CREATED, AREA_SELECTED, LAYERED, REPORTED ]
+          description: The status of the area
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp of when the area was created
+    Point:
+      type: object
+      properties:
+        x:
+          type: number
+          format: double
+          description: X-coordinate (longitude)
+        y:
+          type: number
+          format: double
+          description: Y-coordinate (latitude)
+      required:
+        - x
+        - y
+    LayerCode:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code representing the layer
+      required:
+        - code

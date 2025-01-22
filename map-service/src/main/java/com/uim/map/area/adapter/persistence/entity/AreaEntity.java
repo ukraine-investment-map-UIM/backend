@@ -1,27 +1,26 @@
-package com.uim.map.area.integration.model;
+package com.uim.map.area.adapter.persistence.entity;
 
-import com.uim.map.area.integration.model.enums.AreaStatus;
-import lombok.AllArgsConstructor;
+import com.uim.map.area.domain.core.model.AreaStatus;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
-import java.util.UUID;
 
-@Document(collation = "area")
+@Document(collection = AreaEntity.COLLECTION_AREA)
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 public class AreaEntity {
+    public static final String COLLECTION_AREA = "area";
+
     @Id
-    UUID self;
+    String self;
 
     @Field("userId")
-    UUID userId;
+    String userId;
 
     @Field("coordinates")
     List<Point> coordinates;
@@ -30,7 +29,7 @@ public class AreaEntity {
     List<LayerCode> layers;
 
     @Field("reportId")
-    UUID reportId;
+    String reportId;
 
     @Field("status")
     AreaStatus status;

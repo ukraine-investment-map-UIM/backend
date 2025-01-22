@@ -15,7 +15,7 @@ public class DatabaseInitializer {
     @Bean
     CommandLineRunner initDatabase(MongoTemplate mongoTemplate) {
         return args -> {
-            
+
         };
     }
 
