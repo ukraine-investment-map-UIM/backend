@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -58,5 +59,11 @@ public class AreaPersistenceAdapter implements AreaDao {
         if (areaRepository.updateAreaReportId(areaId, reportId) == 0L) {
             log.warn("area {} wasn't changed due to existing reportId", areaId);
         }
+    }
+
+    @Override
+    public List<Area> findAllByUserId(String userId) {
+        List<AreaEntity> allByUserId = areaRepository.findAllByUserId(userId);
+        return allByUserId.stream().map(areaMapper::toArea).toList();
     }
 }

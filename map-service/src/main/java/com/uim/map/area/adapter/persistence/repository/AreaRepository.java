@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.Update;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface AreaRepository extends MongoRepository<AreaEntity, String> {
@@ -16,4 +17,9 @@ public interface AreaRepository extends MongoRepository<AreaEntity, String> {
             { "$set": { "reportId": ?1 }}
             """)
     long updateAreaReportId(String areaId, UUID reportId);
+
+    @Query("""
+        { "userId": ?0 }
+        """)
+    List<AreaEntity> findAllByUserId(String userId);
 }

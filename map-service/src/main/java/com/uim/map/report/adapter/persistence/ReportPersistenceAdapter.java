@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -30,5 +31,11 @@ public class ReportPersistenceAdapter implements ReportDao {
         reportEntity = reportRepository.save(reportEntity);
 
         return reportPersistenceMapper.toReport(reportEntity);
+    }
+
+    @Override
+    public List<Report> findAllByUserId(UUID userId) {
+        List<ReportEntity> reportEntities = reportRepository.findAllByUserId(userId.toString());
+        return reportEntities.stream().map(reportPersistenceMapper::toReport).toList();
     }
 }

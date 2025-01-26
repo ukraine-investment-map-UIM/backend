@@ -23,8 +23,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReportResponse'
-
-
+    get:
+      tags:
+        - Report
+      summary: Get all reports
+      description: Get all reports of current user
+      operationId: getAll
+      responses:
+        200:
+          description: Areas successfully received
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReportResponse'
 
 # ---------
 

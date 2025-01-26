@@ -3,6 +3,7 @@ package com.uim.map.area.domain.application.service;
 import com.uim.map.area.adapter.persistence.AreaPersistenceAdapter;
 import com.uim.map.area.domain.application.port.api.AreaApplicationProcessingService;
 import com.uim.map.area.domain.application.port.api.GetAreaByIdUseCase;
+import com.uim.map.area.domain.application.port.api.GetAreaByUserIdUseCase;
 import com.uim.map.area.domain.core.model.Area;
 import com.uim.map.area.domain.core.service.AreaService;
 import com.uim.map.config.web.ports.output.AppException;
@@ -12,11 +13,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class AreaApplicationService implements GetAreaByIdUseCase, AreaApplicationProcessingService {
+public class AreaApplicationService implements
+        GetAreaByIdUseCase,
+        AreaApplicationProcessingService,
+        GetAreaByUserIdUseCase {
 
     private final AreaService areaService;
     private final AreaPersistenceAdapter areaPersistenceAdapter;
@@ -41,5 +46,10 @@ public class AreaApplicationService implements GetAreaByIdUseCase, AreaApplicati
     public Area getAreaById(UUID self) {
         return areaPersistenceAdapter.findById(self.toString())
                 .orElseThrow(() -> new AreaNotFoundException(self));
+    }
+
+    @Override
+    public List<Area> getByUserId(UUID userId) {
+        return areaPersistenceAdapter.findAllByUserId(userId.toString());
     }
 }

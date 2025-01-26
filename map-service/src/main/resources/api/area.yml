@@ -22,6 +22,21 @@ paths:
           description: Bad request - Invalid Input
         500:
           description: Internal server error
+    get:
+      tags:
+        - Area
+      summary: Get all areas assigned by user
+      description: Gets all areas of current user
+      operationId: getAll
+      responses:
+        200:
+          description: Areas successfully received
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AreaResponse'
 
   /area/{id}/select-area:
     patch:
