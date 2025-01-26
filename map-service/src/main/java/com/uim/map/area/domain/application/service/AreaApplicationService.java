@@ -1,6 +1,7 @@
 package com.uim.map.area.domain.application.service;
 
 import com.uim.map.area.adapter.persistence.AreaPersistenceAdapter;
+import com.uim.map.area.domain.application.port.api.AreaApplicationProcessingService;
 import com.uim.map.area.domain.application.port.api.GetAreaByIdUseCase;
 import com.uim.map.area.domain.core.model.Area;
 import com.uim.map.area.domain.core.service.AreaService;

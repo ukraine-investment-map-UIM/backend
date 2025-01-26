@@ -1,4 +1,4 @@
-package com.uim.map.area.domain.application.service;
+package com.uim.map.area.domain.application.port.api;
 
 import com.uim.map.area.domain.core.model.Area;
 import com.uim.map.model.AreaDto;

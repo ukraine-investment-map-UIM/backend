@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class AreaService {
     public void validateSelectedReportValue(@NonNull Area area, UUID reportId) {
-        if (Objects.nonNull(area.getReportId()) && Objects.nonNull(reportId)) {
+        if (Objects.nonNull(area.getReportId()) && Objects.nonNull(reportId)) { // todo remove when report is ready
             throw new IllegalStateException("Report is not allowed to be changed once it has been set");
         }
         if (Objects.isNull(area.getReportId()) && Objects.nonNull(reportId)) {

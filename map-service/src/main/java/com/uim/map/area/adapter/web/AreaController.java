@@ -1,8 +1,8 @@
 package com.uim.map.area.adapter.web;
 
 import com.uim.map.api.AreaApi;
+import com.uim.map.area.domain.application.port.api.AreaApplicationProcessingService;
 import com.uim.map.area.domain.application.port.api.GetAreaByIdUseCase;
-import com.uim.map.area.domain.application.service.AreaApplicationProcessingService;
 import com.uim.map.area.domain.core.model.Area;
 import com.uim.map.model.AreaDto;
 import com.uim.map.model.AreaResponse;

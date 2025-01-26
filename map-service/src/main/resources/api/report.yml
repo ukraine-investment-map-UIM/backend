@@ -1,0 +1,74 @@
+openapi: "3.0.0"
+info:
+  title: Report API
+  description: API for managing reports
+  version: 1.0.0
+paths:
+  /report:
+    post:
+      tags:
+        - Report
+      summary: Creation of the report
+      description: Endpoint to create the report from existing areas or without them
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDto'
+      responses:
+        201:
+          description: Report has been successfully initialized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportResponse'
+
+
+
+# ---------
+
+components:
+  schemas:
+    ReportResponse:
+      type: object
+      properties:
+        self:
+          type: string
+          pattern: '^([a-zA-Z0-9]){8}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){12}$'
+          description: Unique identifier for the report
+        areas:
+          type: array
+          description: References to areas connected to this report
+          items:
+            $ref: '#/components/schemas/AreaCode'
+        userId:
+          type: string
+          pattern: '^([a-zA-Z0-9]){8}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){12}$'
+          description: Id of user which created this report
+        url:
+          type: string
+          description: Url of created pdf document
+        status:
+          type: string
+          enum: [ PENDING, FORMED ]
+          description: The status of the report (without url or with url)
+
+    AreaCode:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code representing the area
+      required:
+        - code
+
+    ReportDto:
+      type: object
+      properties:
+        areas:
+          type: array
+          description: References to areas connected to this report
+          default: []
+          items:
+            $ref: '#/components/schemas/AreaCode'

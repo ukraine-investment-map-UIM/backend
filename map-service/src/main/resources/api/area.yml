@@ -11,13 +11,6 @@ paths:
       summary: Initialize an Area
       description: Creates a new area with the provided details.
       operationId: initializeArea
-#      requestBody:
-#        required: true
-#        content:
-#          application/json:
-#            schema:
-#              $ref: '#/components/schemas/AreaDto'
-
       responses:
         201:
           description: Area successfully Created

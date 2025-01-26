@@ -5,6 +5,7 @@ import com.uim.map.model.AreaDto;
 import com.uim.map.model.SelectAreaDto;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public interface AreaDao {
 
@@ -13,4 +14,6 @@ public interface AreaDao {
     Optional<Area> findById(String self);
 
     Area updateAreaCoordinates(Area area, SelectAreaDto selectAreaDto);
+
+    void updateAreaReport(String areaId, UUID reportId);
 }

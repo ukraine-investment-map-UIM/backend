@@ -10,6 +10,7 @@ import com.uim.map.config.security.SecurityUtils;
 import com.uim.map.model.AreaDto;
 import com.uim.map.model.SelectAreaDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class AreaPersistenceAdapter implements AreaDao {
 
     private final AreaRepository areaRepository;
@@ -49,5 +51,12 @@ public class AreaPersistenceAdapter implements AreaDao {
         AreaEntity areaEntity = areaMapper.toAreaEntity(area);
         areaRepository.save(areaEntity);
         return areaMapper.toArea(areaEntity);
+    }
+
+    @Override
+    public void updateAreaReport(String areaId, UUID reportId) {
+        if (areaRepository.updateAreaReportId(areaId, reportId) == 0L) {
+            log.warn("area {} wasn't changed due to existing reportId", areaId);
+        }
     }
 }
