@@ -6,6 +6,7 @@ import com.uim.map.area.domain.application.service.AreaApplicationProcessingServ
 import com.uim.map.area.domain.core.model.Area;
 import com.uim.map.model.AreaDto;
 import com.uim.map.model.AreaResponse;
+import com.uim.map.model.SelectAreaDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,14 @@ public class AreaController implements AreaApi {
     @Override
     public ResponseEntity<AreaResponse> findAreaById(String id) {
         Area area = getAreaByIdUseCase.getAreaById(UUID.fromString(id));
+        var response = areaMapper.toAreaResponse(area);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<AreaResponse> selectArea(String id, SelectAreaDto selectAreaDto) {
+        Area area = getAreaByIdUseCase.getAreaById(UUID.fromString(id));
+        area = areaApplicationProcessingService.selectArea(area, selectAreaDto);
         var response = areaMapper.toAreaResponse(area);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

@@ -30,6 +30,41 @@ paths:
         500:
           description: Internal server error
 
+  /area/{id}/select-area:
+    patch:
+      tags:
+        - Area
+      summary: Select area owned by the investor
+      description: One instance of many area owned by one investor
+      operationId: selectArea
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelectAreaDto'
+
+      parameters:
+        - name: id
+          in: path
+          description: area id
+          required: true
+          schema:
+            type: string
+            pattern: '^([a-zA-Z0-9]){8}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){12}$'
+      responses:
+        200:
+          description: Area successfully selected
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AreaResponse'
+        403:
+          description: Forbidden
+        404:
+          description: Area Not Found
+
+
   /area/{id}:
     get:
       tags:
@@ -59,6 +94,21 @@ paths:
 
 components:
   schemas:
+    SelectAreaDto:
+      type: object
+      properties:
+        cords:
+          type: array
+          description: The geographical coordinates of the area
+          items:
+            $ref: '#/components/schemas/Point'
+        reportId:
+          type: string
+          format: uuid
+          description: The ID of the report linked to the area
+      required:
+        - cords
+
     AreaDto:
       type: object
       properties:
@@ -120,10 +170,12 @@ components:
           type: number
           format: double
           description: X-coordinate (longitude)
+          nullable: false
         y:
           type: number
           format: double
           description: Y-coordinate (latitude)
+          nullable: false
       required:
         - x
         - y

@@ -8,11 +8,13 @@ import com.uim.map.area.domain.core.model.Area;
 import com.uim.map.area.domain.core.model.AreaStatus;
 import com.uim.map.config.security.SecurityUtils;
 import com.uim.map.model.AreaDto;
+import com.uim.map.model.SelectAreaDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -36,5 +38,14 @@ public class AreaPersistenceAdapter implements AreaDao {
     public Optional<Area> findById(String self) {
         return areaRepository.findById(self.toString())
                 .map(areaMapper::toArea);
+    }
+
+    @Override
+    public Area updateAreaCoordinates(Area area, SelectAreaDto selectAreaDto) {
+        area.setCoordinates(selectAreaDto.getCords().stream().map(areaMapper::toPoint).collect(Collectors.toList()));
+        area.setStatus(AreaStatus.AREA_SELECTED);
+        AreaEntity areaEntity = areaMapper.toAreaEntity(area);
+        areaRepository.save(areaEntity);
+        return areaMapper.toArea(areaEntity);
     }
 }
