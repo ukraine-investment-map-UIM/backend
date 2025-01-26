@@ -43,7 +43,9 @@ public class AreaPersistenceAdapter implements AreaDao {
     @Override
     public Area updateAreaCoordinates(Area area, SelectAreaDto selectAreaDto) {
         area.setCoordinates(selectAreaDto.getCords().stream().map(areaMapper::toPoint).collect(Collectors.toList()));
-        area.setStatus(AreaStatus.AREA_SELECTED);
+        if (!area.getStatus().equals(AreaStatus.REPORTED)) {
+            area.setStatus(AreaStatus.AREA_SELECTED);
+        }
         AreaEntity areaEntity = areaMapper.toAreaEntity(area);
         areaRepository.save(areaEntity);
         return areaMapper.toArea(areaEntity);
