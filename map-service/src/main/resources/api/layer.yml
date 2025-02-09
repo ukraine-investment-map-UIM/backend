@@ -1,0 +1,92 @@
+openapi: "3.0.0"
+info:
+  title: Layer API
+  description: private API for managing layers
+  version: 1.0.0
+paths:
+  /layers:
+    post:
+      tags:
+        - Layer
+      summary: Initialize a Layer
+      description: Creates a new layer with the provided details.
+      operationId: createLayer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LayerDto'
+      responses:
+        201:
+          description: Layer successfully Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LayerResponse'
+        400:
+          description: Bad request - Invalid Input
+        500:
+          description: Internal server error
+
+
+#  ------------
+
+
+components:
+  schemas:
+    LayerDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "The name of the layer"
+        description:
+          type: string
+          description: "Description of the intensity field"
+        coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Point'
+          description: "List of coordinates (points) for the layer"
+        intensity:
+          type: number
+          format: double
+          description: "The intensity value of the layer"
+      required:
+        - name
+    LayerResponse:
+      type: object
+      properties:
+        self:
+          type: string
+          description: "The self-reference or URL for the layer"
+        name:
+          type: string
+          description: "The name of the layer"
+        description:
+          type: string
+          description: "Description of the intensity field"
+        coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Point'
+          description: "List of coordinates (points) for the layer"
+        intensity:
+          type: number
+          format: double
+          description: "The intensity value of the layer"
+    Point:
+      type: object
+      properties:
+        x:
+          type: number
+          format: double
+          description: "X-coordinate of the point"
+        y:
+          type: number
+          format: double
+          description: "Y-coordinate of the point"
+      required:
+        - x
+        - y
