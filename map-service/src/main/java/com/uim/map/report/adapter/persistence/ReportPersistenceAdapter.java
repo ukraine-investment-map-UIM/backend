@@ -13,6 +13,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -37,5 +38,11 @@ public class ReportPersistenceAdapter implements ReportDao {
     public List<Report> findAllByUserId(UUID userId) {
         List<ReportEntity> reportEntities = reportRepository.findAllByUserId(userId.toString());
         return reportEntities.stream().map(reportPersistenceMapper::toReport).toList();
+    }
+
+    @Override
+    public Optional<Report> findById(UUID reportId) {
+        return reportRepository.findById(reportId.toString())
+                .map(reportPersistenceMapper::toReport);
     }
 }

@@ -19,7 +19,7 @@ public interface AreaRepository extends MongoRepository<AreaEntity, String> {
     long updateAreaReportId(String areaId, UUID reportId);
 
     @Query("""
-        { "userId": ?0 }
-        """)
+            { "userId": ?0 }
+            """)
     List<AreaEntity> findAllByUserId(String userId);
 }

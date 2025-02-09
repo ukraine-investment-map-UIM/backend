@@ -25,18 +25,18 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: password
       ME_CONFIG_MONGODB_SERVER: mongo
 
-  backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: backend
-    ports:
-      - "18081:18081"
-    depends_on:
-      - mongo
-    environment:
-#      SPRING_PROFILES_ACTIVE: docker
-      MAP_DB_URI: mongo
+#  backend:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: backend
+#    ports:
+#      - "18081:18081"
+#    depends_on:
+#      - mongo
+#    environment:
+##      SPRING_PROFILES_ACTIVE: docker
+#      MAP_DB_URI: mongo
 
 #  user-service:
 #    build:

@@ -1,4 +1,4 @@
-package com.uim.map.area.domain.core.model;
+package com.uim.map.report.domain.core.model;
 
 import java.util.Objects;
 

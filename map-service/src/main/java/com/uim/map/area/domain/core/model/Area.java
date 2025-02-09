@@ -10,7 +10,6 @@ public class Area {
     private UUID self;
     private UUID userId;
     private List<Point> coordinates;
-    private List<Layer> layers;
     private UUID reportId;
     private AreaStatus status;
 
@@ -49,14 +48,6 @@ public class Area {
 
     public void setCoordinates(List<Point> coordinates) {
         this.coordinates = coordinates;
-    }
-
-    public List<Layer> getLayers() {
-        return layers;
-    }
-
-    public void setLayers(List<Layer> layers) {
-        this.layers = layers;
     }
 
     public UUID getReportId() {

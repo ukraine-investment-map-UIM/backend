@@ -1,4 +1,4 @@
-package com.uim.map.area.adapter.persistence.entity;
+package com.uim.map.report.adapter.persistence.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

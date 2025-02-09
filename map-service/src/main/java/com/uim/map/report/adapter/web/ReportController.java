@@ -33,6 +33,13 @@ public class ReportController implements ReportApi {
     }
 
     @Override
+    public ResponseEntity<ReportResponse> findReportById(String id) {
+        Report report = reportGetByUserIdUseCase.getById(UUID.fromString(id));
+        ReportResponse reportResponse = reportApiMapper.toReportResponse(report);
+        return new ResponseEntity<>(reportResponse, HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<List<ReportResponse>> getAll() {
         UUID userId = SecurityUtils.getCurrentUserId();
         List<Report> reports = reportGetByUserIdUseCase.getByUserId(userId);

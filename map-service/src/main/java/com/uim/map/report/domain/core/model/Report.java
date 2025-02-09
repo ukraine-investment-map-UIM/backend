@@ -8,6 +8,7 @@ public class Report {
     private UUID self;
     private List<Area> areas;
     private UUID userId;
+    private List<Layer> layers;
     private String url;
     private ReportStatus status;
 
@@ -38,6 +39,14 @@ public class Report {
 
     public void setAreas(List<Area> areas) {
         this.areas = areas;
+    }
+
+    public List<Layer> getLayers() {
+        return layers;
+    }
+
+    public void setLayers(List<Layer> layers) {
+        this.layers = layers;
     }
 
     public UUID getUserId() {

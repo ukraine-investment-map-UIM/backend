@@ -39,7 +39,31 @@ paths:
                 items:
                   $ref: '#/components/schemas/ReportResponse'
 
-# ---------
+  # ---------
+  /report/{id}:
+    get:
+      tags:
+        - Report
+      summary: Find Report by id
+      description: Finds report by id (self)
+      operationId: findReportById
+      parameters:
+        - name: id
+          in: path
+          description: report id
+          required: true
+          schema:
+            type: string
+            pattern: '^([a-zA-Z0-9]){8}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){12}$'
+      responses:
+        200:
+          description: Report successfully found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportResponse'
+        404:
+          description: Report Not Found
 
 components:
   schemas:
@@ -59,6 +83,11 @@ components:
           type: string
           pattern: '^([a-zA-Z0-9]){8}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){12}$'
           description: Id of user which created this report
+        layers:
+          type: array
+          description: The data layers associated with the area
+          items:
+            $ref: '#/components/schemas/LayerCode'
         url:
           type: string
           description: Url of created pdf document
@@ -82,6 +111,19 @@ components:
         areas:
           type: array
           description: References to areas connected to this report
-          default: []
+          default: [ ]
           items:
             $ref: '#/components/schemas/AreaCode'
+        layers:
+          type: array
+          description: The data layers associated with the area
+          items:
+            $ref: '#/components/schemas/LayerCode'
+    LayerCode:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code representing the layer
+      required:
+        - code

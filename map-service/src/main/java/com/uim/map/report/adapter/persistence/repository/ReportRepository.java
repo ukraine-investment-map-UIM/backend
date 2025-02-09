@@ -9,7 +9,7 @@ import java.util.List;
 public interface ReportRepository extends MongoRepository<ReportEntity, String> {
 
     @Query("""
-        { "userId": ?0 }
-        """)
+            { "userId": ?0 }
+            """)
     List<ReportEntity> findAllByUserId(String string);
 }

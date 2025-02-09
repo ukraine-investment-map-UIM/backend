@@ -125,11 +125,6 @@ components:
           description: The geographical coordinates of the area
           items:
             $ref: '#/components/schemas/Point'
-        layers:
-          type: array
-          description: The data layers associated with the area
-          items:
-            $ref: '#/components/schemas/LayerCode'
         reportId:
           type: string
           format: uuid
@@ -154,11 +149,6 @@ components:
           description: The geographical coordinates of the area
           items:
             $ref: '#/components/schemas/Point'
-        layers:
-          type: array
-          description: The data layers associated with the area
-          items:
-            $ref: '#/components/schemas/LayerCode'
         reportId:
           type: string
           format: uuid
@@ -187,11 +177,3 @@ components:
       required:
         - x
         - y
-    LayerCode:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The code representing the layer
-      required:
-        - code

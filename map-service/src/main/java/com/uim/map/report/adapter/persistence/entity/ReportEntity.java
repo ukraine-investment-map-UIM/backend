@@ -17,12 +17,19 @@ public class ReportEntity {
 
     @Id
     String self;
+
     @Field(name = "areas")
     List<AreaCode> areas;
+
     @Field(name = "userId")
     String userId;
+
+    @Field("layers")
+    List<LayerCode> layers;
+
     @Field(name = "url")
     String url;
+
     @Field(name = "status")
     ReportStatus status;
 }

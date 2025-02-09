@@ -25,9 +25,6 @@ public class AreaEntity {
     @Field("coordinates")
     List<Point> coordinates;
 
-    @Field("layers")
-    List<LayerCode> layers;
-
     @Field("reportId")
     String reportId;
 

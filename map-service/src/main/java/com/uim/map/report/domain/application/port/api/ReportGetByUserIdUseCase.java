@@ -8,4 +8,6 @@ import java.util.UUID;
 public interface ReportGetByUserIdUseCase {
 
     List<Report> getByUserId(UUID userId);
+
+    Report getById(UUID self);
 }

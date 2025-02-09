@@ -43,4 +43,10 @@ public class ReportApplicationService implements
     public List<Report> getByUserId(UUID userId) {
         return reportDao.findAllByUserId(userId);
     }
+
+    @Override
+    public Report getById(UUID self) {
+        return reportDao.findById(self)
+                .orElseThrow(() -> new ReportNotFoundException(self));
+    }
 }
