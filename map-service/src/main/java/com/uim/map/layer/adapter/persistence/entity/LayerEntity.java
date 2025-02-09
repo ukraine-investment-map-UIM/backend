@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
-@Document(collation = LayerEntity.LAYER_COLLECTION)
+@Document(collection = LayerEntity.LAYER_COLLECTION)
 @Data
 @Builder
 public class LayerEntity {

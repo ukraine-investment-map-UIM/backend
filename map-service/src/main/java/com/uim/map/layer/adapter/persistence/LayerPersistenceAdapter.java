@@ -9,7 +9,10 @@ import com.uim.map.model.LayerDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,5 +27,18 @@ public class LayerPersistenceAdapter implements LayerDao {
         layerEntity.setSelf(UUID.randomUUID().toString());
         layerEntity = layerRepository.save(layerEntity);
         return layerPersistenceMapper.toLayer(layerEntity);
+    }
+
+    @Override
+    public List<Layer> findAll() {
+        return layerRepository.findAll().stream()
+                .map(layerPersistenceMapper::toLayer)
+                .toList();
+    }
+
+    @Override
+    public Optional<Layer> findById(String id) {
+        return layerRepository.findById(id)
+                .map(layerPersistenceMapper::toLayer);
     }
 }

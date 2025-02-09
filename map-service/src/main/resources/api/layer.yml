@@ -28,6 +28,45 @@ paths:
           description: Bad request - Invalid Input
         500:
           description: Internal server error
+    get:
+      tags:
+        - Layer
+      summary: Get all layers
+      description: Gets all layers
+      operationId: getAll
+      responses:
+        200:
+          description: Layers successfully received
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LayerResponse'
+  /layers/{id}:
+    get:
+      tags:
+        - Layer
+      summary: Find Layer by id
+      description: Finds layer by id (self)
+      operationId: findLayerById
+      parameters:
+        - name: id
+          in: path
+          description: layer id
+          required: true
+          schema:
+            type: string
+            pattern: '^([a-zA-Z0-9]){8}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){12}$'
+      responses:
+        200:
+          description: Layer successfully found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LayerResponse'
+        404:
+          description: Layer Not Found
 
 
 #  ------------
