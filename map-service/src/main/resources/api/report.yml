@@ -65,6 +65,36 @@ paths:
         404:
           description: Report Not Found
 
+    put:
+      tags:
+        - Report
+      summary: Update Report by id
+      description: Updates report by id (self)
+      operationId: updateReportById
+      parameters:
+        - name: id
+          in: path
+          description: report id
+          required: true
+          schema:
+            type: string
+            pattern: '^([a-zA-Z0-9]){8}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){12}$'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDto'
+      responses:
+        200:
+          description: Report successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportResponse'
+        404:
+          description: Report Not Found
+
 components:
   schemas:
     ReportResponse:
@@ -93,7 +123,7 @@ components:
           description: Url of created pdf document
         status:
           type: string
-          enum: [ PENDING, FORMED ]
+          enum: [ CREATED, AREAED, LAYERED, PENDING, FORMED ]
           description: The status of the report (without url or with url)
 
     AreaCode:
@@ -101,6 +131,7 @@ components:
       properties:
         code:
           type: string
+          pattern: '^([a-zA-Z0-9]){8}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){12}$'
           description: The code representing the area
       required:
         - code
@@ -124,6 +155,7 @@ components:
       properties:
         code:
           type: string
+          pattern: '^([a-zA-Z0-9]){8}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){12}$'
           description: The code representing the layer
       required:
         - code

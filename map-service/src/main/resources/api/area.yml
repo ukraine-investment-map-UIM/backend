@@ -155,7 +155,7 @@ components:
           description: The ID of the report linked to the area
         status:
           type: string
-          enum: [ CREATED, AREA_SELECTED, LAYERED, REPORTED ]
+          enum: [ CREATED, AREA_SELECTED, REPORTED ]
           description: The status of the area
         createdAt:
           type: string

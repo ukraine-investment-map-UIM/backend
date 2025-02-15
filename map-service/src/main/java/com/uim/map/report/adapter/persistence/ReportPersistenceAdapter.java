@@ -6,6 +6,7 @@ import com.uim.map.report.adapter.persistence.entity.ReportEntity;
 import com.uim.map.report.adapter.persistence.mapper.ReportPersistenceMapper;
 import com.uim.map.report.adapter.persistence.repository.ReportRepository;
 import com.uim.map.report.domain.application.port.spi.ReportDao;
+import com.uim.map.report.domain.application.service.ReportNotFoundException;
 import com.uim.map.report.domain.core.model.Report;
 import com.uim.map.report.domain.core.model.ReportStatus;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,11 +29,38 @@ public class ReportPersistenceAdapter implements ReportDao {
     public Report createReport(@NonNull ReportDto reportDto) {
         ReportEntity reportEntity = reportPersistenceMapper.toReportEntity(reportDto);
         reportEntity.setSelf(UUID.randomUUID().toString());
-        reportEntity.setStatus(ReportStatus.PENDING);
         reportEntity.setUserId(SecurityUtils.getCurrentUserId().toString());
+        updateStatus(reportEntity);
         reportEntity = reportRepository.save(reportEntity);
 
         return reportPersistenceMapper.toReport(reportEntity);
+    }
+
+    @Override
+    public Report updateReport(Report report, ReportDto updateReportDto) {
+        ReportEntity reportEntity = reportRepository.findById(report.getSelf().toString())
+                .orElseThrow(() -> new ReportNotFoundException(report.getSelf()));
+        reportPersistenceMapper.toReportEntity(reportEntity, updateReportDto);
+        updateStatus(reportEntity);
+        reportEntity = reportRepository.save(reportEntity);
+        return reportPersistenceMapper.toReport(reportEntity);
+    }
+
+    private ReportEntity updateStatus(ReportEntity reportEntity) {
+        if (reportEntity.getAreas().isEmpty()) {
+            reportEntity.setStatus(ReportStatus.CREATED);
+            return reportEntity;
+        }
+        if (reportEntity.getLayers().isEmpty()) {
+            reportEntity.setStatus(ReportStatus.AREAED);
+            return reportEntity;
+        }
+        if (Objects.isNull(reportEntity.getUrl()) || reportEntity.getUrl().isBlank()) {
+            reportEntity.setStatus(ReportStatus.LAYERED);
+            return reportEntity;
+        }
+        reportEntity.setStatus(ReportStatus.FORMED);
+        return reportEntity;
     }
 
     @Override

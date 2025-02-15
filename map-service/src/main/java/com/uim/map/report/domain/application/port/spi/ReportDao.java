@@ -13,4 +13,6 @@ public interface ReportDao {
     List<Report> findAllByUserId(UUID userId);
 
     Optional<Report> findById(UUID id);
+
+    Report updateReport(Report report, ReportDto updateReportDto);
 }

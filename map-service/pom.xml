@@ -79,16 +79,6 @@
 
 
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-            <version>1.3.2</version>
-        </dependency>
-        <dependency>
             <groupId>org.openapitools</groupId>
             <artifactId>jackson-databind-nullable</artifactId>
             <version>0.2.6</version>
@@ -109,12 +99,6 @@
                     <artifactId>slf4j-simple</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-            <scope>provided</scope>
         </dependency>
 
     </dependencies>
@@ -153,6 +137,7 @@
                                 ApiUtil.java
                             </supportingFilesToGenerate>
                             <configOptions>
+                                <useJakartaEe>true</useJakartaEe>
                                 <apiNameSuffix>Api</apiNameSuffix>
                                 <delegatePattern>true</delegatePattern>
                                 <interfaceOnly>true</interfaceOnly>
@@ -173,6 +158,7 @@
                                 ApiUtil.java
                             </supportingFilesToGenerate>
                             <configOptions>
+                                <useJakartaEe>true</useJakartaEe>
                                 <apiNameSuffix>Api</apiNameSuffix>
                                 <delegatePattern>true</delegatePattern>
                                 <interfaceOnly>true</interfaceOnly>
@@ -193,6 +179,7 @@
                                 ApiUtil.java
                             </supportingFilesToGenerate>
                             <configOptions>
+                                <useJakartaEe>true</useJakartaEe>
                                 <apiNameSuffix>Api</apiNameSuffix>
                                 <delegatePattern>true</delegatePattern>
                                 <interfaceOnly>true</interfaceOnly>

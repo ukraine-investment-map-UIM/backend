@@ -55,7 +55,7 @@ public class AreaPersistenceAdapter implements AreaDao {
     }
 
     @Override
-    public void updateAreaReport(String areaId, UUID reportId) {
+    public void updateAreaReport(String areaId, String reportId) {
         if (areaRepository.updateAreaReportId(areaId, reportId) == 0L) {
             log.warn("area {} wasn't changed due to existing reportId", areaId);
         }

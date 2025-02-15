@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @RestController
@@ -44,5 +45,14 @@ public class ReportController implements ReportApi {
         UUID userId = SecurityUtils.getCurrentUserId();
         List<Report> reports = reportGetByUserIdUseCase.getByUserId(userId);
         return new ResponseEntity<>(reports.stream().map(reportApiMapper::toReportResponse).toList(), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<ReportResponse> updateReportById(String id, ReportDto updateReportDto) {
+        if (Objects.isNull(updateReportDto)) {
+            updateReportDto = new ReportDto();
+        }
+        Report report = reportProcessingService.updateReportById(UUID.fromString(id), updateReportDto);
+        return new ResponseEntity<>(reportApiMapper.toReportResponse(report), HttpStatus.OK);
     }
 }

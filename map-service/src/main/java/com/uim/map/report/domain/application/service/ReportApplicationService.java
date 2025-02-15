@@ -36,7 +36,14 @@ public class ReportApplicationService implements
         if (Objects.isNull(report.getAreas())) {
             return;
         }
-        report.getAreas().forEach(area -> areaDao.updateAreaReport(area.getCode(), report.getSelf()));
+        report.getAreas().forEach(area -> areaDao.updateAreaReport(area.getCode(), report.getSelf().toString()));
+    }
+
+    @Override
+    public Report updateReportById(UUID reportId, ReportDto updateReportDto) {
+        Report report = getById(reportId);
+        report = reportDao.updateReport(report, updateReportDto);
+        return report;
     }
 
     @Override

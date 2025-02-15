@@ -6,7 +6,6 @@ import com.uim.map.model.SelectAreaDto;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface AreaDao {
 
@@ -16,7 +15,7 @@ public interface AreaDao {
 
     Area updateAreaCoordinates(Area area, SelectAreaDto selectAreaDto);
 
-    void updateAreaReport(String areaId, UUID reportId);
+    void updateAreaReport(String areaId, String reportId);
 
     List<Area> findAllByUserId(String userId);
 }
