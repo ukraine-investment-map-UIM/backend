@@ -24,6 +24,28 @@ spring:
     mongodb:
       database: map-service
       uri: mongodb://admin:password@${MAP_DB_URI:localhost}:27017/map-service?authSource=admin
+  kafka:
+    bootstrap-servers: localhost:29092
+    topics:
+      pdf-generation-request: prod.uim.generate-pdf
+    admin:
+      fail-fast: false
+    consumer:
+      group-id: uim-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        socket.connection.setup.timeout.ms: 30000
+      enable-auto-commit: false
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    properties:
+      retries: 10
+      request.timeout.ms: 30000
+      retry.backoff.ms: 1000
 
 
 #springdoc:

@@ -6,6 +6,7 @@ import com.uim.map.layer.adapter.persistence.repository.LayerRepository;
 import com.uim.map.layer.domain.application.port.spi.LayerDao;
 import com.uim.map.layer.domain.core.model.Layer;
 import com.uim.map.model.LayerDto;
+import com.uim.map.report.domain.core.port.spi.LayerProcessingDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +16,7 @@ import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
-public class LayerPersistenceAdapter implements LayerDao {
+public class LayerPersistenceAdapter implements LayerDao, LayerProcessingDao {
 
     private final LayerRepository layerRepository;
     private final LayerPersistenceMapper layerPersistenceMapper;
@@ -39,5 +40,12 @@ public class LayerPersistenceAdapter implements LayerDao {
     public Optional<Layer> findById(String id) {
         return layerRepository.findById(id)
                 .map(layerPersistenceMapper::toLayer);
+    }
+
+    @Override
+    public List<Layer> findLayersByIds(List<String> layerIds) {
+        return layerRepository.findByIdIn(layerIds).stream()
+                .map(layerPersistenceMapper::toLayer)
+                .toList();
     }
 }

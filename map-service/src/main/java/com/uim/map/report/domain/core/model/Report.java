@@ -72,4 +72,16 @@ public class Report {
     public void setStatus(ReportStatus status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Report{" +
+                "self=" + self +
+                ", areas=" + areas +
+                ", userId=" + userId +
+                ", layers=" + layers +
+                ", url='" + url + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }

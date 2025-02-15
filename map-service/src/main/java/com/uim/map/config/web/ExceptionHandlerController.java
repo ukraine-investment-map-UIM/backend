@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.uim.map.util.GlobalConstants.INVALID;
+import static com.uim.map.infrastructure.util.GlobalConstants.INVALID;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @RestControllerAdvice

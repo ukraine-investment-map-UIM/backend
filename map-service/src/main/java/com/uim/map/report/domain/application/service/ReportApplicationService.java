@@ -1,12 +1,17 @@
 package com.uim.map.report.domain.application.service;
 
 import com.uim.map.area.domain.application.port.spi.AreaDao;
+import com.uim.map.infrastructure.calculation.domain.core.model.CalculatedReport;
 import com.uim.map.model.ReportDto;
 import com.uim.map.report.domain.application.port.api.ReportGetByUserIdUseCase;
 import com.uim.map.report.domain.application.port.api.ReportProcessingService;
+import com.uim.map.report.domain.application.port.spi.EventPublisher;
 import com.uim.map.report.domain.application.port.spi.ReportDao;
+import com.uim.map.report.domain.core.model.PdfInitialization;
 import com.uim.map.report.domain.core.model.Report;
+import com.uim.map.report.domain.core.service.ReportService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +26,11 @@ public class ReportApplicationService implements
 
     private final ReportDao reportDao;
     private final AreaDao areaDao;
+    private final ReportService reportService;
+    private final EventPublisher<CalculatedReport> eventPublisher;
+
+    @Value("${spring.kafka.topics.pdf-generation-request}")
+    private String pdfGenerationTopic;
 
     @Override
     public Report create(ReportDto reportDto) {
@@ -44,6 +54,16 @@ public class ReportApplicationService implements
         Report report = getById(reportId);
         report = reportDao.updateReport(report, updateReportDto);
         return report;
+    }
+
+    @Override
+    public Report initiatePdfGeneration(UUID reportId, PdfInitialization pdfInitialization) {
+        Report report = getById(reportId);
+        // todo calculate
+        CalculatedReport calculatedReport = reportService.calculate(report, pdfInitialization);
+        // todo send send kafka message
+        eventPublisher.publish(calculatedReport.getReport().getSelf().toString(), calculatedReport, pdfGenerationTopic);
+        return calculatedReport.getReport();
     }
 
     @Override

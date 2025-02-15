@@ -9,6 +9,7 @@ import com.uim.map.area.domain.core.model.AreaStatus;
 import com.uim.map.config.security.SecurityUtils;
 import com.uim.map.model.AreaDto;
 import com.uim.map.model.SelectAreaDto;
+import com.uim.map.report.domain.core.port.spi.AreaProcessingDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 @Repository
 @RequiredArgsConstructor
 @Slf4j
-public class AreaPersistenceAdapter implements AreaDao {
+public class AreaPersistenceAdapter implements AreaDao, AreaProcessingDao {
 
     private final AreaRepository areaRepository;
     private final AreaPersistenceMapper areaMapper;
@@ -65,5 +66,12 @@ public class AreaPersistenceAdapter implements AreaDao {
     public List<Area> findAllByUserId(String userId) {
         List<AreaEntity> allByUserId = areaRepository.findAllByUserId(userId);
         return allByUserId.stream().map(areaMapper::toArea).toList();
+    }
+
+    @Override
+    public List<Area> findAreasByIds(List<String> areaIds) {
+        return areaRepository.findByIdIn(areaIds).stream()
+                .map(areaMapper::toArea)
+                .toList();
     }
 }

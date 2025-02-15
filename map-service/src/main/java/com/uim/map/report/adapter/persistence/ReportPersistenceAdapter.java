@@ -9,6 +9,7 @@ import com.uim.map.report.domain.application.port.spi.ReportDao;
 import com.uim.map.report.domain.application.service.ReportNotFoundException;
 import com.uim.map.report.domain.core.model.Report;
 import com.uim.map.report.domain.core.model.ReportStatus;
+import com.uim.map.report.domain.core.port.spi.ReportProcessingDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
@@ -20,7 +21,7 @@ import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
-public class ReportPersistenceAdapter implements ReportDao {
+public class ReportPersistenceAdapter implements ReportDao, ReportProcessingDao {
 
     private final ReportRepository reportRepository;
     private final ReportPersistenceMapper reportPersistenceMapper;
@@ -42,6 +43,15 @@ public class ReportPersistenceAdapter implements ReportDao {
                 .orElseThrow(() -> new ReportNotFoundException(report.getSelf()));
         reportPersistenceMapper.toReportEntity(reportEntity, updateReportDto);
         updateStatus(reportEntity);
+        reportEntity = reportRepository.save(reportEntity);
+        return reportPersistenceMapper.toReport(reportEntity);
+    }
+
+    @Override
+    public Report updateStatus(Report report, ReportStatus reportStatus) {
+        ReportEntity reportEntity = reportRepository.findById(report.getSelf().toString())
+                .orElseThrow(() -> new ReportNotFoundException(report.getSelf()));
+        reportEntity.setStatus(reportStatus);
         reportEntity = reportRepository.save(reportEntity);
         return reportPersistenceMapper.toReport(reportEntity);
     }

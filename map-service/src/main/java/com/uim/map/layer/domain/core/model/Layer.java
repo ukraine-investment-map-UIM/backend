@@ -66,4 +66,15 @@ public class Layer {
     public void setIntensity(Double intensity) {
         this.intensity = intensity;
     }
+
+    @Override
+    public String toString() {
+        return "Layer{" +
+                "self='" + self + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", coordinates=" + coordinates +
+                ", intensity=" + intensity +
+                '}';
+    }
 }

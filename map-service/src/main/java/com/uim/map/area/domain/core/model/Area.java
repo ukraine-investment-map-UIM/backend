@@ -65,4 +65,15 @@ public class Area {
     public void setStatus(AreaStatus status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Area{" +
+                "self=" + self +
+                ", userId=" + userId +
+                ", coordinates=" + coordinates +
+                ", reportId=" + reportId +
+                ", status=" + status +
+                '}';
+    }
 }

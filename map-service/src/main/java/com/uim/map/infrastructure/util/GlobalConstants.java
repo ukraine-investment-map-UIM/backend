@@ -1,4 +1,4 @@
-package com.uim.map.util;
+package com.uim.map.infrastructure.util;
 
 public class GlobalConstants {
 

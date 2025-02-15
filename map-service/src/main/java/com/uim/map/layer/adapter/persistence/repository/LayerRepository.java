@@ -10,4 +10,9 @@ public interface LayerRepository extends MongoRepository<LayerEntity, String> {
 
     @Query(value = "{}")
     List<LayerEntity> findAll();
+
+    @Query("""
+            { '_id': { '$in': ?0 } }
+            """)
+    List<LayerEntity> findByIdIn(List<String> layerIds);
 }

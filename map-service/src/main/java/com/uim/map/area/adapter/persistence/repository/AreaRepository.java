@@ -21,4 +21,9 @@ public interface AreaRepository extends MongoRepository<AreaEntity, String> {
             { "userId": ?0 }
             """)
     List<AreaEntity> findAllByUserId(String userId);
+
+    @Query("""
+            { '_id': { '$in': ?0 } }
+            """)
+    List<AreaEntity> findByIdIn(List<String> areaIds);
 }

@@ -95,6 +95,37 @@ paths:
         404:
           description: Report Not Found
 
+  /report/{id}/initiate:
+    post:
+      tags:
+        - Report
+      summary: Initiate pdf generation
+      description: Initiate pdf generation by report id and pdf type
+      operationId: initiatePdfFormation
+      parameters:
+        - name: id
+          in: path
+          description: report id
+          required: true
+          schema:
+            type: string
+            pattern: '^([a-zA-Z0-9]){8}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){4}-([a-zA-Z0-9]){12}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PdfInitializationDto'
+      responses:
+        202:
+          description: Pdf generation has been initialized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportResponse'
+        404:
+          description: Report Not Found
+
 components:
   schemas:
     ReportResponse:
@@ -159,3 +190,13 @@ components:
           description: The code representing the layer
       required:
         - code
+
+    PdfInitializationDto:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [ ONE_PAGE ]
+          description: Type of the generated document
+      required:
+        - type
