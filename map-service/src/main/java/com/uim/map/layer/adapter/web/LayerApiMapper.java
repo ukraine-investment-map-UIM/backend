@@ -1,6 +1,6 @@
 package com.uim.map.layer.adapter.web;
 
-import com.uim.map.layer.domain.core.model.Layer;
+import com.uim.api.layer.domain.core.model.Layer;
 import com.uim.map.model.LayerResponse;
 import org.mapstruct.Mapper;
 

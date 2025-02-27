@@ -4,7 +4,7 @@ import com.uim.map.area.adapter.persistence.AreaPersistenceAdapter;
 import com.uim.map.area.domain.application.port.api.AreaApplicationProcessingService;
 import com.uim.map.area.domain.application.port.api.GetAreaByIdUseCase;
 import com.uim.map.area.domain.application.port.api.GetAreaByUserIdUseCase;
-import com.uim.map.area.domain.core.model.Area;
+import com.uim.api.area.domain.core.model.Area;
 import com.uim.map.area.domain.core.service.AreaService;
 import com.uim.map.config.web.ports.output.AppException;
 import com.uim.map.model.AreaDto;

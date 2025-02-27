@@ -1,6 +1,6 @@
 package com.uim.map.area.domain.application.port.api;
 
-import com.uim.map.area.domain.core.model.Area;
+import com.uim.api.area.domain.core.model.Area;
 import com.uim.map.model.AreaDto;
 import com.uim.map.model.SelectAreaDto;
 

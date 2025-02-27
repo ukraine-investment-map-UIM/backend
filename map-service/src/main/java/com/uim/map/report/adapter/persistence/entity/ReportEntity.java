@@ -1,6 +1,6 @@
 package com.uim.map.report.adapter.persistence.entity;
 
-import com.uim.map.report.domain.core.model.ReportStatus;
+import com.uim.api.report.domain.core.model.ReportStatus;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;

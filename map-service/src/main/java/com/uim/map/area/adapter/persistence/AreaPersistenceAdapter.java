@@ -4,12 +4,14 @@ import com.uim.map.area.adapter.persistence.entity.AreaEntity;
 import com.uim.map.area.adapter.persistence.mapper.AreaPersistenceMapper;
 import com.uim.map.area.adapter.persistence.repository.AreaRepository;
 import com.uim.map.area.domain.application.port.spi.AreaDao;
-import com.uim.map.area.domain.core.model.Area;
-import com.uim.map.area.domain.core.model.AreaStatus;
+import com.uim.api.area.domain.core.model.Area;
+import com.uim.api.area.domain.core.model.AreaStatus;
 import com.uim.map.config.security.SecurityUtils;
 import com.uim.map.model.AreaDto;
+import com.uim.map.model.Point;
 import com.uim.map.model.SelectAreaDto;
 import com.uim.map.report.domain.core.port.spi.AreaProcessingDao;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -46,7 +48,7 @@ public class AreaPersistenceAdapter implements AreaDao, AreaProcessingDao {
 
     @Override
     public Area updateAreaCoordinates(Area area, SelectAreaDto selectAreaDto) {
-        area.setCoordinates(selectAreaDto.getCords().stream().map(areaMapper::toPoint).collect(Collectors.toList()));
+        area.setCoordinates(selectAreaDto.getCords().stream().map((@Valid Point point) -> areaMapper.toPoint(point)).collect(Collectors.toList()));
         if (!area.getStatus().equals(AreaStatus.REPORTED)) {
             area.setStatus(AreaStatus.AREA_SELECTED);
         }

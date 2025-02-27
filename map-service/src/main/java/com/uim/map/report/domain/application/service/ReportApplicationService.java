@@ -1,14 +1,14 @@
 package com.uim.map.report.domain.application.service;
 
 import com.uim.map.area.domain.application.port.spi.AreaDao;
-import com.uim.map.infrastructure.calculation.domain.core.model.CalculatedReport;
+import com.uim.api.infrastructure.calculation.domain.core.model.CalculatedReport;
 import com.uim.map.model.ReportDto;
 import com.uim.map.report.domain.application.port.api.ReportGetByUserIdUseCase;
 import com.uim.map.report.domain.application.port.api.ReportProcessingService;
 import com.uim.map.report.domain.application.port.spi.EventPublisher;
 import com.uim.map.report.domain.application.port.spi.ReportDao;
-import com.uim.map.report.domain.core.model.PdfInitialization;
-import com.uim.map.report.domain.core.model.Report;
+import com.uim.api.report.domain.core.model.PdfInitialization;
+import com.uim.api.report.domain.core.model.Report;
 import com.uim.map.report.domain.core.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

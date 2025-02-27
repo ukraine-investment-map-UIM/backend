@@ -1,6 +1,6 @@
 package com.uim.map.area.adapter.persistence.entity;
 
-import com.uim.map.area.domain.core.model.AreaStatus;
+import com.uim.api.area.domain.core.model.AreaStatus;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;

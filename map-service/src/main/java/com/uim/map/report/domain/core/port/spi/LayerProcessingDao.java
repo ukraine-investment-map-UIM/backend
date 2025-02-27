@@ -1,6 +1,6 @@
 package com.uim.map.report.domain.core.port.spi;
 
-import com.uim.map.layer.domain.core.model.Layer;
+import com.uim.api.layer.domain.core.model.Layer;
 
 import java.util.List;
 

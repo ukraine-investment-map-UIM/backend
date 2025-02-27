@@ -1,7 +1,7 @@
 package com.uim.map.layer.adapter.persistence.mapper;
 
 import com.uim.map.layer.adapter.persistence.entity.LayerEntity;
-import com.uim.map.layer.domain.core.model.Layer;
+import com.uim.api.layer.domain.core.model.Layer;
 import com.uim.map.model.LayerDto;
 import com.uim.map.model.Point;
 import org.mapstruct.Mapper;

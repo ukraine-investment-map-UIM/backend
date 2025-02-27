@@ -1,11 +1,11 @@
 package com.uim.map.report.domain.core.service;
 
-import com.uim.map.area.domain.core.model.Area;
-import com.uim.map.infrastructure.calculation.domain.core.model.CalculatedReport;
-import com.uim.map.layer.domain.core.model.Layer;
-import com.uim.map.report.domain.core.model.PdfInitialization;
-import com.uim.map.report.domain.core.model.Report;
-import com.uim.map.report.domain.core.model.ReportStatus;
+import com.uim.api.area.domain.core.model.Area;
+import com.uim.api.infrastructure.calculation.domain.core.model.CalculatedReport;
+import com.uim.api.layer.domain.core.model.Layer;
+import com.uim.api.report.domain.core.model.PdfInitialization;
+import com.uim.api.report.domain.core.model.Report;
+import com.uim.api.report.domain.core.model.ReportStatus;
 import com.uim.map.report.domain.core.port.spi.AreaProcessingDao;
 import com.uim.map.report.domain.core.port.spi.LayerProcessingDao;
 import com.uim.map.report.domain.core.port.spi.ReportProcessingDao;
@@ -47,7 +47,7 @@ public class ReportService {
 
     private List<Layer> getLayersFromReport(Report report) {
         List<String> layerIds = report.getLayers().stream()
-                .map(com.uim.map.report.domain.core.model.Layer::getCode)
+                .map(com.uim.api.report.domain.core.model.Layer::getCode)
                 .toList();
         List<Layer> layers = layerDao.findLayersByIds(layerIds);
         if (layers.size() != layerIds.size()) {
@@ -58,7 +58,7 @@ public class ReportService {
 
     private List<Area> getAreasFromReport(Report report) {
         List<String> areaIds = report.getAreas().stream()
-                .map(com.uim.map.report.domain.core.model.Area::getCode)
+                .map(com.uim.api.report.domain.core.model.Area::getCode)
                 .toList();
         List<Area> areas = areaDao.findAreasByIds(areaIds);
         if (areas.size() != areaIds.size()) {

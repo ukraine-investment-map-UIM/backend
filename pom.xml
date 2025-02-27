@@ -18,6 +18,7 @@
         <module>user-service</module>
         <module>map-service</module>
         <module>ai-service</module>
+        <module>api</module>
     </modules>
     <properties>
         <java.version>21</java.version>

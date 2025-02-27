@@ -1,7 +1,7 @@
 package com.uim.map.report.domain.application.port.spi;
 
 import com.uim.map.model.ReportDto;
-import com.uim.map.report.domain.core.model.Report;
+import com.uim.api.report.domain.core.model.Report;
 
 import java.util.List;
 import java.util.Optional;

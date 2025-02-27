@@ -1,0 +1,53 @@
+server:
+  port: 18082
+  http2:
+    enabled: true
+  forward-headers-strategy: FRAMEWORK
+  servlet:
+    context-path: /ai
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, httptrace
+      base-path: /actuator
+
+spring:
+  application:
+    name: ai-application
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  kafka:
+    bootstrap-servers: localhost:29092
+    topics:
+      pdf-generation-request: prod.uim.generate-pdf
+    admin:
+      fail-fast: false
+    consumer:
+      group-id: uim-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        socket.connection.setup.timeout.ms: 30000
+      enable-auto-commit: false
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    properties:
+      retries: 10
+      request.timeout.ms: 30000
+      retry.backoff.ms: 1000
+
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+  #    org.springframework.orm.jpa: DEBUG
+  #    org.springframework.transaction: DEBUG
+  config: classpath:log/logback-spring.xml
+  format: ${LOGGING_FORMAT:text}

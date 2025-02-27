@@ -1,6 +1,6 @@
 package com.uim.map.area.domain.core.service;
 
-import com.uim.map.area.domain.core.model.Area;
+import com.uim.api.area.domain.core.model.Area;
 import com.uim.map.config.security.SecurityUtils;
 import org.springframework.lang.NonNull;
 
