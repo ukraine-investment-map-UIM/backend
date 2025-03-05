@@ -89,7 +89,8 @@ public class ReportInitiationConsumer {
 //                .generationType(Prompt.GenerationType.HTML)
 //                .build();
         if (Prompt.GenerationType.HTML.equals(prompt.getGenerationType())) {
-            htmlToPdfGenerator.generateByPrompt(prompt);
+            String url = htmlToPdfGenerator.generateByPrompt(prompt);
+
         }
 
     }

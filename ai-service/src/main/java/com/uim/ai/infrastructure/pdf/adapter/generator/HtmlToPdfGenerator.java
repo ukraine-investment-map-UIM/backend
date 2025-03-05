@@ -1,6 +1,7 @@
 package com.uim.ai.infrastructure.pdf.adapter.generator;
 
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
+import com.uim.ai.infrastructure.config.aws.S3Service;
 import com.uim.ai.infrastructure.openai.domain.core.model.Prompt;
 import com.uim.ai.infrastructure.pdf.domain.application.port.spi.PdfGenerator;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,23 +25,21 @@ import java.util.UUID;
 @Qualifier(HtmlToPdfGenerator.HTML_PDF_GENERATOR_QUALIFIER)
 public class HtmlToPdfGenerator implements PdfGenerator {
     public static final String HTML_PDF_GENERATOR_QUALIFIER = "HTML_PDF_GENERATOR_QUALIFIER";
+    private final S3Service s3Service;
+
     @Override
     @SneakyThrows
-    public <T> void generateByPrompt(Prompt<T> prompt) {
-
-        Path directory = Paths.get("pdfs");
-        Path filePath = directory.resolve(UUID.randomUUID().toString() + "-report.pdf");
-
-        if (!Files.exists(directory)) {
-            Files.createDirectories(directory);
-        }
-
-        try (OutputStream os = new FileOutputStream(filePath.toAbsolutePath().toString())) {
+    public <T> String generateByPrompt(Prompt<T> prompt) {
+        try (ByteArrayOutputStream os = new ByteArrayOutputStream()) {
             PdfRendererBuilder builder = new PdfRendererBuilder();
             builder.useFastMode();
             builder.withHtmlContent(prompt.getPromptResponse(), null);
             builder.toStream(os);
             builder.run();
+
+            byte[] pdfBytes = os.toByteArray();
+            String filename = UUID.randomUUID().toString() + "-report.pdf";
+            return s3Service.uploadToS3(pdfBytes, filename);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

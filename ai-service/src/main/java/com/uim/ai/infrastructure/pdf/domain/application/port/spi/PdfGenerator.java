@@ -4,5 +4,5 @@ import com.uim.ai.infrastructure.openai.domain.core.model.Prompt;
 
 public interface PdfGenerator {
 
-    <T> void generateByPrompt(Prompt<T> prompt);
+    <T> String generateByPrompt(Prompt<T> prompt);
 }
