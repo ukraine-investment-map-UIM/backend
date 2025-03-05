@@ -1,5 +1,7 @@
 package com.uim.map.report.adapter.persistence;
 
+import com.uim.api.report.domain.core.model.Report;
+import com.uim.api.report.domain.core.model.ReportStatus;
 import com.uim.map.config.security.SecurityUtils;
 import com.uim.map.model.ReportDto;
 import com.uim.map.report.adapter.persistence.entity.ReportEntity;
@@ -7,8 +9,6 @@ import com.uim.map.report.adapter.persistence.mapper.ReportPersistenceMapper;
 import com.uim.map.report.adapter.persistence.repository.ReportRepository;
 import com.uim.map.report.domain.application.port.spi.ReportDao;
 import com.uim.map.report.domain.application.service.ReportNotFoundException;
-import com.uim.api.report.domain.core.model.Report;
-import com.uim.api.report.domain.core.model.ReportStatus;
 import com.uim.map.report.domain.core.port.spi.ReportProcessingDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
@@ -71,6 +71,13 @@ public class ReportPersistenceAdapter implements ReportDao, ReportProcessingDao 
         }
         reportEntity.setStatus(ReportStatus.FORMED);
         return reportEntity;
+    }
+
+    @Override
+    public Report updateReport(Report report) {
+        ReportEntity reportEntity = reportPersistenceMapper.toReportEntity(report);
+        reportEntity = reportRepository.save(reportEntity);
+        return reportPersistenceMapper.toReport(reportEntity);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.uim.map.layer.adapter.web;
 
+import com.uim.api.layer.domain.core.model.Layer;
 import com.uim.map.api.LayersApi;
 import com.uim.map.layer.domain.application.port.api.GetLayerByIdUseCase;
 import com.uim.map.layer.domain.application.port.api.LayerProcessingService;
-import com.uim.api.layer.domain.core.model.Layer;
 import com.uim.map.model.LayerDto;
 import com.uim.map.model.LayerResponse;
 import lombok.RequiredArgsConstructor;

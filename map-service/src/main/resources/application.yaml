@@ -28,6 +28,7 @@ spring:
     bootstrap-servers: localhost:29092
     topics:
       pdf-generation-request: prod.uim.generate-pdf
+      pdf-generation-response: prod.uim.generate-pdf-response
     admin:
       fail-fast: false
     consumer:

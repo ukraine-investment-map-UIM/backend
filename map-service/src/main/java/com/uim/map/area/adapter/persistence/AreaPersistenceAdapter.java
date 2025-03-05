@@ -1,11 +1,11 @@
 package com.uim.map.area.adapter.persistence;
 
+import com.uim.api.area.domain.core.model.Area;
+import com.uim.api.area.domain.core.model.AreaStatus;
 import com.uim.map.area.adapter.persistence.entity.AreaEntity;
 import com.uim.map.area.adapter.persistence.mapper.AreaPersistenceMapper;
 import com.uim.map.area.adapter.persistence.repository.AreaRepository;
 import com.uim.map.area.domain.application.port.spi.AreaDao;
-import com.uim.api.area.domain.core.model.Area;
-import com.uim.api.area.domain.core.model.AreaStatus;
 import com.uim.map.config.security.SecurityUtils;
 import com.uim.map.model.AreaDto;
 import com.uim.map.model.Point;

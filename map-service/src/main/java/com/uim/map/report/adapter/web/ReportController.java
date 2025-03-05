@@ -1,5 +1,7 @@
 package com.uim.map.report.adapter.web;
 
+import com.uim.api.report.domain.core.model.PdfInitialization;
+import com.uim.api.report.domain.core.model.Report;
 import com.uim.map.api.ReportApi;
 import com.uim.map.config.security.SecurityUtils;
 import com.uim.map.model.PdfInitializationDto;
@@ -7,8 +9,6 @@ import com.uim.map.model.ReportDto;
 import com.uim.map.model.ReportResponse;
 import com.uim.map.report.domain.application.port.api.ReportGetByUserIdUseCase;
 import com.uim.map.report.domain.application.port.api.ReportProcessingService;
-import com.uim.api.report.domain.core.model.PdfInitialization;
-import com.uim.api.report.domain.core.model.Report;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

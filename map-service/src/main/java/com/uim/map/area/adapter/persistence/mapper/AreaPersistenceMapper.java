@@ -1,8 +1,8 @@
 package com.uim.map.area.adapter.persistence.mapper;
 
+import com.uim.api.area.domain.core.model.Area;
 import com.uim.api.infrastructure.calculation.domain.core.model.Point;
 import com.uim.map.area.adapter.persistence.entity.AreaEntity;
-import com.uim.api.area.domain.core.model.Area;
 import com.uim.map.model.AreaDto;
 import org.mapstruct.Mapper;
 

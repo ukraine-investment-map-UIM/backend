@@ -1,7 +1,7 @@
 package com.uim.map.report.domain.application.port.spi;
 
-import com.uim.map.model.ReportDto;
 import com.uim.api.report.domain.core.model.Report;
+import com.uim.map.model.ReportDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,4 +15,6 @@ public interface ReportDao {
     Optional<Report> findById(UUID id);
 
     Report updateReport(Report report, ReportDto updateReportDto);
+
+    Report updateReport(Report report);
 }

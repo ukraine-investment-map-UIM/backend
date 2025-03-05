@@ -28,6 +28,7 @@ public class Prompt<T> {
     public void setGenerationType(GenerationType generationType) {
         this.generationType = generationType;
     }
+
     public T getData() {
         return data;
     }

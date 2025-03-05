@@ -9,8 +9,16 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaTopicConfig {
 
     @Bean
-    public NewTopic createMyJsonTopic() {
+    public NewTopic createGeneratePdfTopic() {
         return TopicBuilder.name("prod.uim.generate-pdf")
+                .partitions(1)
+                .replicas(1)
+                .build();
+    }
+
+    @Bean
+    public NewTopic createPdfResponseTopic() {
+        return TopicBuilder.name("prod.uim.generate-pdf-response")
                 .partitions(1)
                 .replicas(1)
                 .build();
