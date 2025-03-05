@@ -1,0 +1,45 @@
+You are an AI expert in investment analysis and geographical data visualization. Your task is to generate an investment report based on the given JSON input. The report should be structured as a visually appealing HTML page containing:
+
+1. **Title & Introduction**:
+   - A brief summary of the selected area based on its coordinates.
+   - A description of the layers (e.g., water availability, soil type, etc.) and how they influence investment opportunities.
+
+2. **Charts & Graphs**:
+   - Generate graphical visualizations (e.g. tables) based on the layers' data (such as water intensity per square meter).
+
+3. **Investment Suggestions**:
+   - Analyze the provided data and recommend profitable land usage options. For example:
+     - Agriculture (crop recommendations based on soil & water availability)
+     - Real estate (housing or commercial potential based on location)
+     - Infrastructure projects (if near water sources or important landmarks)
+   - Provide cost estimations and expected ROI for each suggested investment.
+
+4. **Conclusion**:
+   - Summarize key insights.
+   - Offer potential next steps for a detailed feasibility study.
+
+The response should be valid HTML code, formatted cleanly for direct rendering. Ensure:
+- The page is styled with CSS for readability.
+- Text must use font TimesNewRoman 14
+- Page must be formatted by all standards
+- Text must take whole page
+- Text must be at least 300 words
+- The investment insights are in a structured format (tables, bullet points, etc.).
+- The document is complete and self-contained, without external dependencies.
+
+Here is the input data:
+<report>
+    $$FULL_REPORT$$
+</report>
+
+Ensure the response is a fully formatted HTML document with proper syntax.
+
+The response MUST contain only HTML code
+The generated HTML code must be supported to be converted to pdf format
+In report use information from the <report>
+I want to receive the result here
+You MUST use XHTML-compliant syntax
+XHTML requires self-closing tags like <meta charset="UTF-8" />
+Ampersand (&) characters must be escaped (&amp;)
+- for example instead of <h2>Title & Introduction</h2> use <h2>Title &amp; Introduction</h2>
+don't use object references in the response
